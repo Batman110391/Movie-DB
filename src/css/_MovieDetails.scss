@@ -22,6 +22,10 @@
 
     div {
       margin-right: 20px;
+
+      @media screen and (max-width: $small) {
+        margin-right: 0;
+      }
     }
 
     .poster-movie {
@@ -35,6 +39,7 @@
 
       @media screen and (max-width: $large) {
         width: 145px;
+        max-height: 215px;
       }
 
       img {

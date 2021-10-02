@@ -86,7 +86,9 @@ function MovieDetails() {
             </p>
           </div>
           <div className="rating-movie">
-            <div className="saving-movie">icone</div>
+            <div className="saving-movie">
+              <i className="fa fa-spinner fa-spin">no spinner but why</i>
+            </div>
             <div className="ratings">
               <h4>
                 <span></span>
