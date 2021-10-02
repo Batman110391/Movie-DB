@@ -209,6 +209,44 @@
       }
     }
   }
+
+  h6 {
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .cast-movie {
+    border-top: 2px solid $gray-super-light;
+    height: 300px;
+    overflow-y: scroll;
+
+    .person {
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      border: 1px solid rgba(128, 128, 128, 0.678);
+      padding: 2px;
+      border-radius: 5px;
+
+      img {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        border-radius: 5px;
+      }
+      div {
+        display: flex;
+        flex-direction: column;
+        .name-person {
+          color: #fff;
+        }
+
+        span {
+          margin-left: 30px;
+        }
+      }
+    }
+  }
 }
 
 .backdrop-container {
