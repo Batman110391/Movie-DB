@@ -1,0 +1,21 @@
+@import "./variables";
+
+@import "./BackgroundHome";
+@import "./movieOfDay";
+@import "./Header";
+@import "./MovieDetails";
+
+.wrapper-site {
+  overflow: hidden;
+}
+
+.link {
+  font-size: 1.35rem;
+  border-bottom: 1px solid #456;
+  color: $link;
+  text-decoration: none;
+
+  &:hover {
+    color: $link-hover;
+  }
+}
