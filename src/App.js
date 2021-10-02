@@ -8,8 +8,6 @@ import MovieOfDays from "./components/MovieOfDays";
 import Header from "./components/Header";
 import MovieDetails from "./components/MovieDetails";
 
-import "../node_modules/font-awesome/css/font-awesome.min.css";
-
 function App() {
   const [movieDay, setMovieDay] = useState([]);
 

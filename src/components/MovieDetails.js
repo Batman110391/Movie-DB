@@ -53,6 +53,10 @@ function MovieDetails() {
     }
   };
 
+  const toggleEnable = (e) => {
+    e.target.classList.toggle("enable");
+  };
+
   return (
     <div className="container-movie-details">
       <Header />
@@ -80,6 +84,11 @@ function MovieDetails() {
                   </a>
                 </p>
               </h2>
+              <span className="link trailer">
+                <a>
+                  <i class="fab fa-youtube"></i> Trailer
+                </a>
+              </span>
             </div>
             <p className="mobile" onClick={(e) => toggleOverview(e)}>
               {movieDay?.overview}
@@ -87,14 +96,30 @@ function MovieDetails() {
           </div>
           <div className="rating-movie">
             <div className="saving-movie">
-              <i className="fa fa-spinner fa-spin">no spinner but why</i>
+              <i
+                onClick={(e) => toggleEnable(e)}
+                className="fas fa-heart enable"
+              >
+                <span>Mi Piace</span>
+              </i>
+              <i onClick={(e) => toggleEnable(e)} className="fas fa-eye enable">
+                <span>Visto</span>
+              </i>
+              <i
+                onClick={(e) => toggleEnable(e)}
+                className="far fa-clock enable"
+              >
+                <span>Da Vedere</span>
+              </i>
             </div>
             <div className="ratings">
               <h4>
                 <span></span>
                 <span>{movieDay?.vote_count} Voti</span>
               </h4>
-              <p>{movieDay?.vote_average}</p>
+              <p>
+                {movieDay?.vote_average} <i className="fab fa-imdb"></i>
+              </p>
             </div>
           </div>
         </div>

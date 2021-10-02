@@ -66,10 +66,24 @@
           left: 45%;
         }
 
+        .trailer {
+          cursor: pointer;
+          font-size: 16px;
+        }
+
+        .fa-youtube {
+          color: red;
+
+          &::before {
+            vertical-align: middle;
+          }
+        }
+
         h2 {
           color: $white;
           font-size: 2.3rem;
           margin-top: -10px;
+          margin-bottom: 0;
 
           @media screen and (max-width: $small) {
             font-size: 1.8rem;
@@ -83,6 +97,7 @@
 
           p {
             margin-top: 10px;
+            margin-bottom: 5px;
             color: $gray-super-light;
             font-size: 1.15rem;
           }
@@ -120,12 +135,51 @@
       margin: 0 auto;
 
       .saving-movie {
-        padding: 12px 0;
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 0;
         background-color: #456;
         border-bottom: 1px solid #2c3440;
         box-sizing: border-box;
         color: $gray-super-light;
         text-align: center;
+        border-radius: 10px;
+
+        .fa-heart {
+          color: rgb(214, 77, 77);
+        }
+
+        .fa-eye {
+          color: rgb(71, 185, 71);
+        }
+
+        .fa-clock {
+          color: rgb(52, 113, 192);
+        }
+
+        i {
+          font-size: 2rem;
+          cursor: pointer;
+          display: flex;
+          flex-direction: column;
+
+          &.enable {
+            color: $gray-super-light;
+          }
+
+          span {
+            color: $gray-super-light;
+            font-size: 13px;
+            margin-top: 5px;
+            font-weight: 700;
+          }
+
+          &:hover {
+            span {
+              color: rgb(230, 230, 230);
+            }
+          }
+        }
       }
 
       .ratings {
@@ -146,6 +200,11 @@
           font-size: 1.3rem;
           font-weight: bold;
           text-align: center;
+        }
+
+        .fa-imdb {
+          color: gold;
+          font-size: 25px;
         }
       }
     }
