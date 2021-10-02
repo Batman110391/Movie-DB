@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 function MovieDetails() {
   const [movieDay, setMovieDay] = useState([]);
   const [directorMovie, setDirectorMovie] = useState({ id: "", name: "" });
-  const [mobileView, setMobileView] = useState(true);
   const [movieCast, setMovieCast] = useState([]);
 
   let { movie } = useParams();
@@ -49,7 +48,9 @@ function MovieDetails() {
   };
 
   const toggleOverview = (e) => {
-    e.target.addClass("mobile");
+    if (e.target.classList.contains("mobile")) {
+      e.target.classList.toggle("mobile-drop");
+    }
   };
 
   return (
@@ -80,7 +81,9 @@ function MovieDetails() {
                 </p>
               </h2>
             </div>
-            <p onClick={(e) => toggleOverview(e)}>{movieDay?.overview}</p>
+            <p className="mobile" onClick={(e) => toggleOverview(e)}>
+              {movieDay?.overview}
+            </p>
           </div>
           <div className="rating-movie">
             <div className="saving-movie">icone</div>

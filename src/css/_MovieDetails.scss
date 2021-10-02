@@ -53,7 +53,7 @@
         @media screen and (max-width: $large) {
           position: absolute;
           max-width: 500px;
-          top: 1%;
+          top: 2px;
           left: 30%;
         }
 
@@ -103,12 +103,16 @@
           &.mobile {
             -webkit-line-clamp: 4;
           }
+          &.mobile-drop {
+            -webkit-line-clamp: unset;
+          }
         }
       }
     }
 
     .rating-movie {
       width: 230px;
+      margin: 0 auto;
 
       .saving-movie {
         padding: 12px 0;
