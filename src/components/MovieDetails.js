@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 
 function MovieDetails() {
   const [movieDay, setMovieDay] = useState([]);
+  const [similarMovie, setSimilarMovie] = useState([]);
+  const [reviewMovie, setReviewMovie] = useState([]);
   const [directorMovie, setDirectorMovie] = useState({ id: "", name: "" });
   const [movieCast, setMovieCast] = useState([]);
   const [movieCrew, setMovieCrew] = useState([]);
@@ -14,7 +16,31 @@ function MovieDetails() {
   useEffect(() => {
     getDayMovies();
     getMovieCast();
+    getSimilarMovies();
+    getReviewMovies();
   }, []);
+
+  const getSimilarMovies = () => {
+    fetch(
+      `https://api.themoviedb.org/3/movie/${movie}/similar?api_key=${process.env.REACT_APP_SECRET_CODE}&language=it-IT`
+    )
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log(data);
+        setSimilarMovie(data.results);
+      });
+  };
+
+  const getReviewMovies = () => {
+    fetch(
+      `https://api.themoviedb.org/3/movie/${movie}/reviews?api_key=${process.env.REACT_APP_SECRET_CODE}`
+    )
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log(data);
+        setReviewMovie(data);
+      });
+  };
 
   const getDayMovies = () => {
     fetch(
@@ -22,7 +48,6 @@ function MovieDetails() {
     )
       .then((resp) => resp.json())
       .then((data) => {
-        console.log(data);
         setMovieDay(data);
       });
   };
@@ -33,8 +58,6 @@ function MovieDetails() {
     )
       .then((resp) => resp.json())
       .then((data) => {
-        console.log(data);
-
         const director = data.crew.filter(
           (curDirector) => curDirector.job === "Director"
         );
@@ -106,14 +129,22 @@ function MovieDetails() {
         document.querySelector(".cast").classList.add("open");
         document.querySelector(".crew").classList.remove("open");
         document.querySelector(".film-simili").classList.remove("open");
+        document.querySelector(".recensioni").classList.remove("open");
       } else if (type === "crew") {
         document.querySelector(".cast").classList.remove("open");
         document.querySelector(".crew").classList.add("open");
         document.querySelector(".film-simili").classList.remove("open");
+        document.querySelector(".recensioni").classList.remove("open");
       } else if (type === "film simili") {
         document.querySelector(".cast").classList.remove("open");
         document.querySelector(".crew").classList.remove("open");
         document.querySelector(".film-simili").classList.add("open");
+        document.querySelector(".recensioni").classList.remove("open");
+      } else if (type === "recensioni") {
+        document.querySelector(".cast").classList.remove("open");
+        document.querySelector(".crew").classList.remove("open");
+        document.querySelector(".film-simili").classList.remove("open");
+        document.querySelector(".recensioni").classList.add("open");
       }
     });
   };
@@ -179,7 +210,7 @@ function MovieDetails() {
                 <span>{movieDay?.vote_count} Voti</span>
               </h4>
               <p>
-                {movieDay?.vote_average} <i className="fab fa-imdb"></i>
+                {movieDay?.vote_average} / 10 <i className="fab fa-imdb"></i>
               </p>
             </div>
           </div>
@@ -202,6 +233,12 @@ function MovieDetails() {
             onClick={(e) => toggleAccordion(e, "film simili")}
           >
             film simili
+          </button>
+          <button
+            className="current-accordion"
+            onClick={(e) => toggleAccordion(e, "recensioni")}
+          >
+            recensioni
           </button>
         </div>
         <div className="cast-movie cast open">
@@ -238,7 +275,23 @@ function MovieDetails() {
             </div>
           ))}
         </div>
-        <div className="cast-movie film-simili">// da fare</div>
+        <div className="other-movie film-simili">
+          {similarMovie.map((curMovie, i) => {
+            if (i < 7) {
+              return (
+                <div className="movie">
+                  <img
+                    src={
+                      "http://image.tmdb.org/t/p/w500" + curMovie?.poster_path
+                    }
+                  ></img>
+                  <span>{curMovie?.title}</span>
+                </div>
+              );
+            }
+          })}
+        </div>
+        <div className="other-movie recensioni">// da fare e</div>
       </div>
     </div>
   );
