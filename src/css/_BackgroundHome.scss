@@ -9,8 +9,16 @@
     height: 500px;
   }
 
+  @media screen and (max-width: $large-2) {
+    height: 550px;
+  }
+
   @media screen and (max-width: $medium) {
-    height: 325px;
+    height: 420px;
+  }
+
+  @media screen and (max-width: $small) {
+    height: 340px;
   }
 
   .backdrop {
@@ -23,7 +31,13 @@
 
     @media screen and (max-width: $medium) {
       font-size: 2rem;
-      top: -12px;
+      top: -43px;
+    }
+
+    @media screen and (max-width: $small) {
+      left: -50px;
+      width: 121%;
+      top: -13px;
     }
 
     &::before {
@@ -111,7 +125,7 @@
     font-size: 2.8rem;
     line-height: 1.33333333;
     color: $white;
-    margin-top: -130px;
+    margin-top: -235px;
     font-weight: bold;
     font-family: "Crimson Text", serif;
     letter-spacing: -3px;
@@ -121,15 +135,20 @@
       font-size: 2.5rem;
     }
 
+    @media screen and (max-width: $large-2) {
+      margin-top: -190px;
+    }
+
     @media screen and (max-width: $medium) {
-      font-size: 2rem;
-      margin-top: -50px;
+      font-size: 2.4rem;
+      margin-top: -134px;
     }
 
     @media screen and (max-width: $small) {
       font-size: 1.6rem;
-      margin-top: 0;
+      margin: -75px auto;
       letter-spacing: -2px;
+      width: 85%;
     }
   }
 }

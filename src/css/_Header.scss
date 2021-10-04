@@ -5,11 +5,19 @@
   justify-content: space-around;
   flex-wrap: wrap;
   align-items: flex-end;
+  background-color: #14181c6e;
+  padding: 6px;
+  border-radius: 10px;
 
   .logo {
     h1 {
       margin: 0;
       padding: 0;
+      font-size: 1.5rem;
+    }
+
+    @media screen and (max-width: $small) {
+      display: none;
     }
   }
 
@@ -89,7 +97,7 @@
         font-family: "FontAwesome";
         font-weight: 400;
         content: "\f002";
-        color: $gray-super-light;
+        color: #ebebeb;
         position: absolute;
         right: 12px;
         top: 4px;
@@ -103,7 +111,7 @@
         font-family: "FontAwesome";
         font-weight: 400;
         content: "\f002";
-        color: $gray-super-light;
+        color: #ebebeb;
         position: absolute;
         right: 12px;
         top: 4px;

@@ -9,6 +9,12 @@
   overflow: hidden;
 }
 
+.container-site {
+  max-width: $extra-large;
+  margin: auto;
+  padding: 0 7px;
+}
+
 .link {
   font-size: 1.35rem;
   border-bottom: 1px solid #456;

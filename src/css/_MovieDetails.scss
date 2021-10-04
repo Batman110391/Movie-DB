@@ -1,15 +1,15 @@
 .container-details {
   color: $gray-super-light;
   max-width: $large;
-  margin: -260px auto 0 auto;
+  margin: -300px auto 0 auto;
   position: relative;
 
   @media screen and (max-width: $large) {
-    margin-top: -240px;
+    margin-top: -315x;
   }
 
   @media screen and (max-width: $small) {
-    margin-top: -170px;
+    margin-top: -185px;
   }
 
   .info-movie {

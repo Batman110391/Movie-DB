@@ -30,7 +30,7 @@ function App() {
     <Router>
       <Switch>
         <Route path="/" exact>
-          <div className="container wrapper-site">
+          <div className="container-site wrapper-site">
             <Header />
             <BackgroundHome
               backgroundImg={movieDay[0] ? movieDay[0]?.backdrop_path : ""}
@@ -40,7 +40,7 @@ function App() {
           </div>
         </Route>
         <Route path="/movie/:movie">
-          <div className="container wrapper-site">
+          <div className="container-site wrapper-site">
             <MovieDetails />
           </div>
         </Route>
