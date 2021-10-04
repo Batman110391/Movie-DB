@@ -8,7 +8,6 @@ function BackgroundHome({ backgroundImg, home }) {
           className="backdrop-img"
           src={"http://image.tmdb.org/t/p/original" + backgroundImg}
         ></img>
-        <div className="effect-backdrop"></div>
       </div>
       {home && (
         <div className="title-info">
