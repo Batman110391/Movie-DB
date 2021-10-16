@@ -66,6 +66,11 @@
           left: 45%;
         }
 
+        @media screen and (max-width: $small) {
+          left: 160px;
+          line-break: anywhere;
+        }
+
         .trailer {
           cursor: pointer;
           font-size: 16px;
@@ -99,7 +104,15 @@
             margin-top: 10px;
             margin-bottom: 5px;
             color: $gray-super-light;
-            font-size: 1.15rem;
+            font-size: 1rem;
+
+            span {
+              display: block;
+            }
+
+            a {
+              font-size: 1.1rem;
+            }
           }
         }
       }
@@ -122,9 +135,24 @@
 
           &.mobile {
             -webkit-line-clamp: 4;
+            position: relative;
+
+            .blur {
+              position: absolute;
+              bottom: -12px;
+              height: 20px;
+              left: 0;
+              right: 0;
+              background-color: #14181c;
+              filter: blur(12px);
+            }
           }
           &.mobile-drop {
             -webkit-line-clamp: unset;
+
+            .blur {
+              display: none;
+            }
           }
         }
       }
@@ -232,7 +260,7 @@
 
   .cast-movie {
     border-top: 1px solid rgba(128, 128, 128, 0.678);
-    height: 300px;
+    height: 380px;
     overflow-y: scroll;
     display: none;
     margin-bottom: 100px;
@@ -279,13 +307,36 @@
     &.open {
       display: flex;
       flex-wrap: wrap;
+      justify-content: space-between;
+
+      @media screen and (max-width: $small) {
+        justify-content: space-around;
+      }
     }
+
+    a {
+      color: unset;
+      text-decoration: none;
+    }
+
     .movie {
-      width: 120px;
-      height: 170px;
+      width: 115px;
+      height: 160px;
       margin-bottom: 30px;
-      margin-right: 21px;
+      margin-right: 5px;
       margin-top: 20px;
+      border: 1px solid;
+
+      span {
+        font-size: 11px;
+        display: block;
+        text-align: center;
+        margin-top: 5px;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+      }
 
       img {
         width: 100%;
@@ -296,6 +347,33 @@
 
   .recensioni {
     display: none;
+    height: 380px;
+    overflow-y: scroll;
+
+    .review-user {
+      padding: 20px 0;
+      display: flex;
+
+      .avatar-user {
+        text-align: center;
+        margin-right: 20px;
+        min-width: 58px;
+        img {
+          width: 40px;
+          height: 40px;
+          object-fit: cover;
+          border-radius: 50%;
+        }
+        span {
+          font-size: 11px;
+          display: block;
+        }
+      }
+      .review-content {
+        max-height: 200px;
+        overflow-y: scroll;
+      }
+    }
 
     &.open {
       display: block;

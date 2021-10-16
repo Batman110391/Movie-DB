@@ -25,3 +25,25 @@
     color: $link-hover;
   }
 }
+
+.back-line {
+  display: none;
+
+  @media screen and (max-width: $small) {
+    display: block;
+
+    padding: 6px 10px;
+    width: 126%;
+    margin-left: -10px;
+    border-radius: 12px;
+
+    i {
+      font-size: 30px;
+      color: #4e4e4e;
+      background: #ffffffcc;
+      border-radius: 50%;
+      border: 1px;
+      border-style: dotted;
+    }
+  }
+}
