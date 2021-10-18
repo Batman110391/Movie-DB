@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Skeleton from "@mui/material/Skeleton";
 
 function Header() {
   const [movieSearch, setMovieSearch] = useState([]);
+  let loading = false;
 
   const searchMovie = (e) => {
-    getMovieKeywords(e.target.value);
+    if (e.target.value != "") getMovieKeywords(e.target.value);
+    else setMovieSearch([]);
   };
 
   const getMovieKeywords = (keywords, page = 1) => {
+    loading = true;
     fetch(
       `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_SECRET_CODE}&language=it-IT&query=${keywords}&page=${page}`
     )
       .then((resp) => resp.json())
       .then((data) => {
         setMovieSearch(data.results);
+        loading = false;
       });
   };
 
@@ -52,14 +57,28 @@ function Header() {
       <div className="container-movie-search">
         {movieSearch?.map((curMovie, i) => (
           <div className="movie-search">
-            <img
-              src={"http://image.tmdb.org/t/p/w500" + curMovie?.poster_path}
-              alt={curMovie?.title}
-            ></img>
-            <h2>
-              {curMovie?.title}{" "}
-              <span>({curMovie?.release_date?.substr(0, 4)})</span>
-            </h2>
+            {!loading ? (
+              <Link to={`/movie/${curMovie.id}`}>
+                <img
+                  src={
+                    curMovie?.poster_path
+                      ? "http://image.tmdb.org/t/p/w500" + curMovie?.poster_path
+                      : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"
+                  }
+                  alt={curMovie?.title}
+                ></img>
+                <h2>
+                  {curMovie?.title}{" "}
+                  <span>({curMovie?.release_date?.substr(0, 4)})</span>
+                </h2>
+              </Link>
+            ) : (
+              <Skeleton
+                width="100%"
+                height="70px"
+                style={{ backgroundColor: "gray" }}
+              />
+            )}
           </div>
         ))}
       </div>
