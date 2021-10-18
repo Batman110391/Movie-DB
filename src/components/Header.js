@@ -4,7 +4,7 @@ import Skeleton from "@mui/material/Skeleton";
 
 function Header() {
   const [movieSearch, setMovieSearch] = useState([]);
-  let loading = false;
+  const [loading, setLoading] = useState(true);
 
   const searchMovie = (e) => {
     if (e.target.value != "") getMovieKeywords(e.target.value);
@@ -12,14 +12,13 @@ function Header() {
   };
 
   const getMovieKeywords = (keywords, page = 1) => {
-    loading = true;
     fetch(
       `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_SECRET_CODE}&language=it-IT&query=${keywords}&page=${page}`
     )
       .then((resp) => resp.json())
       .then((data) => {
         setMovieSearch(data.results);
-        loading = false;
+        setLoading(false);
       });
   };
 
