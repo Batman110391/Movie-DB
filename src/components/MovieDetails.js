@@ -17,12 +17,17 @@ function MovieDetails() {
   let { movie } = useParams();
 
   useEffect(() => {
+    setLoading(true);
+
     getDayMovies();
     getMovieCast();
     getSimilarMovies();
     getReviewMovies();
 
-    setLoading(false);
+    setTimeout(() => {
+      setLoading(false);
+      window.scrollTo(0, 0);
+    }, 0);
   }, [movie]);
 
   const getSimilarMovies = () => {
@@ -31,7 +36,6 @@ function MovieDetails() {
     )
       .then((resp) => resp.json())
       .then((data) => {
-        console.log(data);
         setSimilarMovie(data.results);
       });
   };
@@ -42,7 +46,6 @@ function MovieDetails() {
     )
       .then((resp) => resp.json())
       .then((data) => {
-        console.log("review-movie: ", data);
         setReviewMovie(data.results);
       });
   };
@@ -84,11 +87,11 @@ function MovieDetails() {
 
         function createObject(curCast) {
           let person = {
-            character: curCast.character,
-            job: curCast.job,
-            name: curCast.name,
-            id: curCast.id,
-            img: curCast.profile_path,
+            character: curCast?.character,
+            job: curCast?.job,
+            name: curCast?.name,
+            id: curCast?.id,
+            img: curCast?.profile_path,
           };
 
           return person;
@@ -103,8 +106,8 @@ function MovieDetails() {
 
         if (director) {
           let obj = {
-            id: director[0].id,
-            name: director[0].name,
+            id: director[0]?.id,
+            name: director[0]?.name,
           };
 
           setDirectorMovie(obj);
@@ -182,9 +185,9 @@ function MovieDetails() {
                     <span>({movieDay?.release_date?.substr(0, 4)})</span>
                     <p>
                       <span>Diretto da</span>
-                      <a className="link" href={"cast/" + directorMovie.id}>
+                      <Link className="link" to={`/person/${directorMovie.id}`}>
                         {directorMovie.name}
-                      </a>
+                      </Link>
                     </p>
                   </h2>
                   <span className="link trailer">
@@ -259,36 +262,40 @@ function MovieDetails() {
             </div>
             <div className="cast-movie cast open">
               {movieCast.map((curPerson) => (
-                <div className="person">
-                  <img
-                    src={
-                      curPerson.img
-                        ? "http://image.tmdb.org/t/p/w500" + curPerson.img
-                        : "data:image/jpeg;base64,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"
-                    }
-                  ></img>
-                  <div>
-                    <span className="name-person">{curPerson?.name}</span>
-                    <span>{curPerson?.character}</span>
+                <Link to={`/person/${curPerson.id}`}>
+                  <div className="person">
+                    <img
+                      src={
+                        curPerson.img
+                          ? "http://image.tmdb.org/t/p/w500" + curPerson.img
+                          : "data:image/jpeg;base64,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"
+                      }
+                    ></img>
+                    <div>
+                      <span className="name-person">{curPerson?.name}</span>
+                      <span>{curPerson?.character}</span>
+                    </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
             <div className="cast-movie crew">
               {movieCrew.map((curPerson) => (
-                <div className="person">
-                  <img
-                    src={
-                      curPerson.img
-                        ? "http://image.tmdb.org/t/p/w500" + curPerson.img
-                        : "data:image/jpeg;base64,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"
-                    }
-                  ></img>
-                  <div>
-                    <span className="name-person">{curPerson?.name}</span>
-                    <span>{curPerson?.job}</span>
+                <Link to={`/person/${curPerson.id}`}>
+                  <div className="person">
+                    <img
+                      src={
+                        curPerson.img
+                          ? "http://image.tmdb.org/t/p/w500" + curPerson.img
+                          : "data:image/jpeg;base64,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"
+                      }
+                    ></img>
+                    <div>
+                      <span className="name-person">{curPerson?.name}</span>
+                      <span>{curPerson?.job}</span>
+                    </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
             <div className="other-movie film-simili">
@@ -337,7 +344,7 @@ function MovieDetails() {
           <Skeleton
             width="100%"
             height="300px"
-            style={{ marginTop: "-50px", backgroundColor: "gray" }}
+            style={{ backgroundColor: "gray" }}
           />
           <div className="d-flex" style={{ marginTop: "-80px" }}>
             <Skeleton

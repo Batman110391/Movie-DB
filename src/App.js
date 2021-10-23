@@ -7,12 +7,20 @@ import BackgroundHome from "./components/BackgroundHome";
 import MovieOfDays from "./components/MovieOfDays";
 import Header from "./components/Header";
 import MovieDetails from "./components/MovieDetails";
+import PersonDetail from "./components/PersonDetail";
+import Skeleton from "@mui/material/Skeleton";
 
 function App() {
   const [movieDay, setMovieDay] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     getDayMovies();
+    setTimeout(() => {
+      setLoading(false);
+      window.scrollTo(0, 0);
+    }, 0);
   }, []);
 
   const getDayMovies = () => {
@@ -30,18 +38,37 @@ function App() {
     <Router>
       <Switch>
         <Route path="/" exact>
-          <div className="container-site wrapper-site">
-            <Header />
-            <BackgroundHome
-              backgroundImg={movieDay[0] ? movieDay[0]?.backdrop_path : ""}
-              home={true}
-            />
-            <MovieOfDays movieOfDays={movieDay} />
-          </div>
+          {!loading ? (
+            <div className="container-site wrapper-site">
+              <Header />
+              <BackgroundHome
+                backgroundImg={movieDay[0] ? movieDay[0]?.backdrop_path : ""}
+                home={true}
+              />
+              <MovieOfDays movieOfDays={movieDay} />
+            </div>
+          ) : (
+            <>
+              <Skeleton
+                width="100%"
+                height="300px"
+                style={{ backgroundColor: "gray" }}
+              />
+              <Skeleton style={{ backgroundColor: "gray" }} />
+              <Skeleton style={{ backgroundColor: "gray" }} />
+              <Skeleton style={{ backgroundColor: "gray" }} />
+              <Skeleton height="300px" style={{ backgroundColor: "gray" }} />
+            </>
+          )}
         </Route>
         <Route path="/movie/:movie">
           <div className="container-site wrapper-site">
             <MovieDetails />
+          </div>
+        </Route>
+        <Route path="/person/:person">
+          <div className="container-site wrapper-site">
+            <PersonDetail />
           </div>
         </Route>
       </Switch>

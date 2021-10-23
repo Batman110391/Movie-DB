@@ -68,7 +68,6 @@
 
         @media screen and (max-width: $small) {
           left: 160px;
-          line-break: anywhere;
         }
 
         .trailer {
@@ -266,6 +265,11 @@
     display: none;
     margin-bottom: 100px;
 
+    a {
+      text-decoration: none;
+      color: unset;
+    }
+
     &.open {
       display: block;
     }
@@ -326,6 +330,7 @@
       margin-bottom: 30px;
       margin-right: 5px;
       margin-top: 20px;
+      object-fit: cover;
       border: 1px solid;
 
       span {
@@ -354,6 +359,7 @@
     .review-user {
       padding: 20px 0;
       display: flex;
+      border-bottom: 1px solid gray;
 
       .avatar-user {
         text-align: center;
@@ -386,6 +392,6 @@
   @media screen and (max-width: $small) {
     width: 126%;
     margin-left: -50px;
-    margin-top: -50px;
+    margin-top: 10px;
   }
 }

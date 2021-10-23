@@ -4,6 +4,7 @@
 @import "./movieOfDay";
 @import "./Header";
 @import "./MovieDetails";
+@import "./PersonDetail";
 
 .wrapper-site {
   overflow: hidden;
@@ -26,24 +27,41 @@
   }
 }
 
-.back-line {
+#back-line {
   display: none;
 
   @media screen and (max-width: $small) {
     display: block;
-
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    background-image: linear-gradient(
+      180deg,
+      #14181c 0,
+      rgba(20, 24, 28, 0.945) 16.56%,
+      rgba(20, 24, 28, 0.802) 30.85%,
+      rgba(20, 24, 28, 0.606) 43.77%,
+      rgba(20, 24, 28, 0.394) 56.23%,
+      rgba(20, 24, 28, 0.198) 69.15%,
+      rgba(20, 24, 28, 0.055) 83.44%,
+      rgba(20, 24, 28, 0)
+    );
+    background-repeat: repeat-x;
+    height: 60px;
+    opacity: 0.7;
     padding: 6px 10px;
-    width: 126%;
-    margin-left: -10px;
     border-radius: 12px;
 
-    i {
-      font-size: 30px;
-      color: #4e4e4e;
-      background: #ffffffcc;
-      border-radius: 50%;
-      border: 1px;
-      border-style: dotted;
+    .container-icon {
+      display: flex;
+      justify-content: space-between;
+
+      i {
+        font-size: 30px;
+        color: #e1e1e1;
+      }
     }
   }
 }
