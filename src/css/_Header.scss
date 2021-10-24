@@ -133,6 +133,11 @@
   max-height: 75vh;
   border-radius: 0 5px 5px;
 
+  @media screen and (min-width: $small) {
+    max-width: 1035px;
+    margin: auto;
+  }
+
   .movie-search {
     a {
       display: flex;

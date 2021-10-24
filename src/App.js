@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import MovieDetails from "./components/MovieDetails";
 import PersonDetail from "./components/PersonDetail";
 import Skeleton from "@mui/material/Skeleton";
+import Footer from "./components/Footer";
 
 function App() {
   const [movieDay, setMovieDay] = useState([]);
@@ -39,14 +40,17 @@ function App() {
       <Switch>
         <Route path="/" exact>
           {!loading ? (
-            <div className="container-site wrapper-site">
-              <Header />
-              <BackgroundHome
-                backgroundImg={movieDay[0] ? movieDay[0]?.backdrop_path : ""}
-                home={true}
-              />
-              <MovieOfDays movieOfDays={movieDay} />
-            </div>
+            <>
+              <div id="begin" className="container-site wrapper-site">
+                <Header />
+                <BackgroundHome
+                  backgroundImg={movieDay[0] ? movieDay[0]?.backdrop_path : ""}
+                  home={true}
+                />
+                <MovieOfDays movieOfDays={movieDay} />
+              </div>
+              <Footer />
+            </>
           ) : (
             <>
               <Skeleton
@@ -62,14 +66,20 @@ function App() {
           )}
         </Route>
         <Route path="/movie/:movie">
-          <div className="container-site wrapper-site">
-            <MovieDetails />
-          </div>
+          <>
+            <div id="begin" className="container-site wrapper-site">
+              <MovieDetails />
+            </div>
+            <Footer />
+          </>
         </Route>
         <Route path="/person/:person">
-          <div className="container-site wrapper-site">
-            <PersonDetail />
-          </div>
+          <>
+            <div id="begin" className="container-site wrapper-site">
+              <PersonDetail />
+            </div>
+            <Footer />
+          </>
         </Route>
       </Switch>
     </Router>

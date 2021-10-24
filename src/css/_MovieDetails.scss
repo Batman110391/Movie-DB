@@ -241,6 +241,10 @@
   .accordion {
     display: flex;
 
+    @media screen and (min-width: $small) {
+      margin-top: 30px;
+    }
+
     button {
       margin-right: 20px;
       background: transparent;
@@ -265,6 +269,11 @@
     display: none;
     margin-bottom: 100px;
 
+    @media screen and (min-width: $small) {
+      height: unset;
+      overflow-y: unset;
+    }
+
     a {
       text-decoration: none;
       color: unset;
@@ -272,6 +281,11 @@
 
     &.open {
       display: block;
+
+      @media screen and (min-width: $small) {
+        display: flex;
+        flex-wrap: wrap;
+      }
     }
 
     .person {
@@ -281,6 +295,12 @@
       border: 1px solid rgba(128, 128, 128, 0.678);
       padding: 2px;
       border-radius: 5px;
+
+      @media screen and (min-width: $small) {
+        width: fit-content;
+        margin-right: 10px;
+        padding: 2px 9px;
+      }
 
       img {
         width: 40px;
@@ -356,6 +376,11 @@
     height: 380px;
     overflow-y: scroll;
 
+    @media screen and (min-width: $small) {
+      overflow-y: unset;
+      height: unset;
+    }
+
     .review-user {
       padding: 20px 0;
       display: flex;
@@ -379,6 +404,11 @@
       .review-content {
         max-height: 200px;
         overflow-y: scroll;
+
+        @media screen and (min-width: $small) {
+          overflow-y: unset;
+          padding: 5px;
+        }
       }
     }
 

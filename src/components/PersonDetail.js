@@ -71,6 +71,7 @@ function PersonDetail() {
               alt={personDetail?.name}
             ></img>
             <div>
+              <h6>{personDetail?.name}</h6>
               <span>{personDetail?.place_of_birth}</span>
               <span>{personDetail?.birthday}</span>
             </div>

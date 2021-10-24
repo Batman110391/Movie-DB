@@ -116,6 +116,15 @@
       .title {
         opacity: 1;
       }
+
+      @media screen and (max-width: $small) {
+        .card-info {
+          opacity: 0;
+        }
+        .title {
+          opacity: 0;
+        }
+      }
     }
   }
 }
