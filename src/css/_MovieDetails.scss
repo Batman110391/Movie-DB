@@ -28,9 +28,39 @@
       }
     }
 
+    .box-poster {
+      position: relative;
+      height: 350px;
+
+      @media screen and (max-width: $small) {
+        height: unset;
+      }
+
+      .watch-providers {
+        position: absolute;
+        bottom: -50px;
+
+        @media screen and (max-width: $small) {
+          height: unset;
+          top: 175px;
+          right: 105px;
+        }
+
+        a {
+          margin-right: 10px;
+          img {
+            width: 50px;
+            border: 1px solid gray;
+            @media screen and (max-width: $small) {
+              width: 40px;
+            }
+          }
+        }
+      }
+    }
+
     .poster-movie {
       width: 230px;
-      height: 100%;
       min-width: 145px;
       border-radius: 4px;
       border: 1px solid $border-card-movie;
@@ -264,14 +294,25 @@
 
   .cast-movie {
     border-top: 1px solid rgba(128, 128, 128, 0.678);
-    height: 380px;
-    overflow-y: scroll;
+    border-bottom: 4px solid rgba(128, 128, 128, 0.678);
+    height: 450px;
+
     display: none;
     margin-bottom: 100px;
+    padding-bottom: 20px;
 
     @media screen and (min-width: $small) {
       height: unset;
       overflow-y: unset;
+    }
+
+    .box-accordion {
+      height: 430px;
+      overflow-y: scroll;
+
+      @media screen and (min-width: $small) {
+        display: contents;
+      }
     }
 
     a {
@@ -324,7 +365,9 @@
 
   .other-movie {
     border-top: 1px solid rgba(128, 128, 128, 0.678);
+    border-bottom: 4px solid rgba(128, 128, 128, 0.678);
     margin-bottom: 100px;
+    padding-bottom: 15px;
   }
   .film-simili {
     display: none;
@@ -373,8 +416,15 @@
 
   .recensioni {
     display: none;
-    height: 380px;
-    overflow-y: scroll;
+    height: 450px;
+
+    .box-accordion {
+      height: 430px;
+      overflow-y: scroll;
+      @media screen and (min-width: $small) {
+        display: contents;
+      }
+    }
 
     @media screen and (min-width: $small) {
       overflow-y: unset;
@@ -402,13 +452,7 @@
         }
       }
       .review-content {
-        max-height: 200px;
-        overflow-y: scroll;
-
-        @media screen and (min-width: $small) {
-          overflow-y: unset;
-          padding: 5px;
-        }
+        padding: 5px;
       }
     }
 

@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Skeleton from "@mui/material/Skeleton";
 
 function Header() {
   const [movieSearch, setMovieSearch] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    HandlerSearch();
+  }, []);
 
   const searchMovie = (e) => {
     if (e.target.value != "") getMovieKeywords(e.target.value);
@@ -20,6 +24,16 @@ function Header() {
         setMovieSearch(data.results);
         setLoading(false);
       });
+  };
+
+  const HandlerSearch = () => {
+    document.addEventListener("mouseup", function (e) {
+      if (
+        !document.querySelector(".container-movie-search")?.contains(e.target)
+      ) {
+        setMovieSearch([]);
+      }
+    });
   };
 
   return (

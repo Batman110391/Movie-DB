@@ -6,6 +6,7 @@
 @import "./MovieDetails";
 @import "./PersonDetail";
 @import "./Footer";
+@import "./Nav";
 
 .wrapper-site {
   overflow: hidden;
@@ -53,7 +54,6 @@
     height: 60px;
     opacity: 0.7;
     padding: 6px 10px;
-    border-radius: 12px;
 
     .container-icon {
       display: flex;

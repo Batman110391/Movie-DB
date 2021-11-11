@@ -20,7 +20,7 @@ function PersonDetail() {
     setTimeout(() => {
       setLoading(false);
       window.scrollTo(0, 0);
-    }, 0);
+    }, 100);
   }, [person]);
 
   const getPersonDetails = () => {

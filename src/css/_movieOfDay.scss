@@ -6,16 +6,18 @@
     width: 100%;
 
     .flickity-page-dots .dot {
-      background: $white;
+      display: none;
     }
 
     @media screen and (min-width: $extra-large) {
-      .flickity-page-dots {
+      .flickity-button {
         display: none;
       }
 
-      .flickity-button {
-        display: none;
+      &.upcoming {
+        .flickity-button {
+          display: block;
+        }
       }
     }
   }
@@ -28,6 +30,11 @@
     border: 1px solid $border-card-movie;
     cursor: pointer;
     position: relative;
+
+    &.upcoming {
+      height: 170px;
+      width: 115px;
+    }
 
     .title {
       position: absolute;
@@ -126,5 +133,23 @@
         }
       }
     }
+  }
+}
+
+.upcoming {
+  margin-top: 30px;
+}
+
+.title-movie-home {
+  color: gray;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 0.9rem;
+  letter-spacing: 3px;
+  margin: 10px 0;
+
+  &.upcoming {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
   }
 }
