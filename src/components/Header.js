@@ -2,10 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Skeleton from "@mui/material/Skeleton";
 import Nav from "./Nav";
+import { useParams } from "react-router-dom";
 
 function Header() {
   const [movieSearch, setMovieSearch] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  let { movie } = useParams();
+
+  useEffect(() => {
+    setMovieSearch([]);
+    document.querySelector(".search-input").value = "";
+  }, [movie]);
 
   useEffect(() => {
     HandlerSearch();

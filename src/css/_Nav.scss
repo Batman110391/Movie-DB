@@ -1,4 +1,6 @@
 .navigation .nav-movie .container-login-db {
+  font-weight: normal;
+
   .nav-bar {
     cursor: pointer;
   }
@@ -9,7 +11,6 @@
     padding: 0;
     padding-bottom: 9px;
     position: absolute;
-    right: -100px;
     text-align: center;
     background-color: #fff;
     -webkit-box-shadow: 0px 2px 50px 10px rgba(0, 0, 0, 0.2);
@@ -39,7 +40,7 @@
 
   .content-auth {
     position: relative;
-    height: 220px;
+    height: 230px;
   }
 
   .button__log-in h4,
@@ -59,13 +60,13 @@
     width: 220px;
     position: absolute;
     left: 11px;
-    top: 45px;
+    top: 55px;
     padding: 8px 0;
     z-index: 0;
   }
 
   .firebaseui-card-content {
-    padding: 0 10px !important;
+    padding: 0 5px !important;
   }
 
   button.firebaseui-idp-button {

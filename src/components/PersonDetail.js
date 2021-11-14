@@ -3,6 +3,7 @@ import BackLine from "./BackLine";
 import { useParams } from "react-router-dom";
 import Skeleton from "@mui/material/Skeleton";
 import { Link } from "react-router-dom";
+import { getUnique } from "../utility";
 
 function PersonDetail() {
   const [personDetail, setPerson] = useState({});
@@ -45,7 +46,13 @@ function PersonDetail() {
         data?.crew?.sort(function (a, b) {
           return b.popularity - a.popularity;
         });
-        setPersonCredit([data]);
+        var castUnique = getUnique(data?.cast);
+        var crewUnique = getUnique(data?.crew);
+        setPersonCredit({
+          cast: [castUnique],
+          crew: [crewUnique],
+        });
+        console.log(personCredit);
       });
   };
 
@@ -83,9 +90,9 @@ function PersonDetail() {
             </p>
           </div>
           <div className="person-work">
-            <h5>Attore in {personCredit[0]?.cast?.length} Film</h5>
+            <h5>Attore in {personCredit?.cast[0]?.length} Film</h5>
             <div className="person-cast">
-              {personCredit[0]?.cast?.map((curMovie, i) => (
+              {personCredit?.cast[0]?.map((curMovie, i) => (
                 <Link to={`/movie/${curMovie.id}`}>
                   <img
                     src={
@@ -100,9 +107,9 @@ function PersonDetail() {
               ))}
             </div>
 
-            <h5>Regista/Produttore in {personCredit[0]?.crew?.length} Film</h5>
+            <h5>Regista/Produttore in {personCredit?.crew[0]?.length} Film</h5>
             <div className="person-crew">
-              {personCredit[0]?.crew?.map((curMovie, i) => (
+              {personCredit?.crew[0]?.map((curMovie, i) => (
                 <Link to={`/movie/${curMovie.id}`}>
                   <img
                     src={

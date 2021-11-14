@@ -62,8 +62,6 @@
     .person-crew {
       display: flex;
       flex-wrap: wrap;
-      max-height: 380px;
-      overflow-y: scroll;
       @media screen and (max-width: $extra-small) {
         justify-content: space-around;
       }

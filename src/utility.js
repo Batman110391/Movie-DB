@@ -8,9 +8,9 @@ export const random = (arr, Max) => {
 };
 
 export const getUnique = (arr) => {
-  var unique = arr.filter(function (elem, index, self) {
-    return index === self.indexOf(elem);
-  });
+  var unique = arr.filter(
+    (thing, index, self) => index === self.findIndex((t) => t.id === thing.id)
+  );
 
   return unique;
 };
