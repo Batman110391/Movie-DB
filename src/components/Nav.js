@@ -216,16 +216,14 @@ function Nav() {
     <>
       <nav className="nav-bar">
         {imgUser ? (
-          <div className="content-user-img">
-            <img
-              onClick={openPopUp}
-              className="user-img"
-              src={imgUser}
-              alt={state.email}
-            />
+          <div onClick={openPopUp}>
+            <div className="content-user-img">
+              <img className="user-img" src={imgUser} alt={state.email} />
+            </div>
+            <span className="name-login-db">{state.name}</span>
           </div>
         ) : (
-          <i onClick={openPopUp} className="fas fa-user-circle"></i>
+          <div onClick={openPopUp}>sign in</div>
         )}
       </nav>
       <div className="pop-up">
@@ -244,7 +242,7 @@ function Nav() {
                 <CircularProgress />
               </div>
             ) : (
-              <div>
+              <div className="container-img-upload">
                 <input
                   onChange={handleChangeImg}
                   accept="image/*"
@@ -281,6 +279,7 @@ function Nav() {
               <FormControl
                 className={clsx(classes.margin, classes.textField)}
                 variant="outlined"
+                autocomplete="off"
               >
                 <InputLabel
                   className="label-form"
@@ -292,6 +291,7 @@ function Nav() {
                   className="email"
                   id="outlined-adornment-email"
                   type="email"
+                  autoComplete="off"
                   onChange={handleChangeEmail}
                   placeholder="example@email.it"
                   labelWidth={70}
@@ -317,6 +317,7 @@ function Nav() {
                   id="outlined-adornment-password"
                   type={valuesPass.showPassword ? "text" : "password"}
                   value={valuesPass.password}
+                  autoComplete="off"
                   onChange={handleChangePass}
                   endAdornment={
                     <InputAdornment position="end">

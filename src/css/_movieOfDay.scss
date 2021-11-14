@@ -115,21 +115,14 @@
     }
 
     &:hover {
-      border: 1px solid $border-card-movie-hover;
+      @media screen and (min-width: $small) {
+        border: 1px solid $border-card-movie-hover;
 
-      .card-info {
-        opacity: 1;
-      }
-      .title {
-        opacity: 1;
-      }
-
-      @media screen and (max-width: $small) {
         .card-info {
-          opacity: 0;
+          opacity: 1;
         }
         .title {
-          opacity: 0;
+          opacity: 1;
         }
       }
     }

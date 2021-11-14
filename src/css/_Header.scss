@@ -4,10 +4,22 @@
   align-items: center;
   justify-content: space-around;
   flex-wrap: wrap;
-  padding: 6px;
+  padding: 0 6px;
   margin-bottom: 12px;
 
+  @media screen and (max-width: $small) {
+    padding: 6px;
+  }
+
+  .container-login-db {
+    position: relative;
+  }
+
   .logo {
+    a {
+      text-decoration: none;
+      color: #ebebeb;
+    }
     h1 {
       margin: 0;
       padding: 0;
@@ -23,19 +35,13 @@
     display: flex;
     align-items: center;
     color: $nav-section-color;
+    .nav-film {
+      margin-right: 40px;
+    }
 
     div {
       text-transform: uppercase;
       font-weight: bold;
-
-      &:first-of-type {
-        margin-right: 40px;
-      }
-
-      &:hover {
-        color: $white;
-        cursor: pointer;
-      }
     }
   }
 

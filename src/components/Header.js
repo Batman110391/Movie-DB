@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Skeleton from "@mui/material/Skeleton";
+import Nav from "./Nav";
 
 function Header() {
   const [movieSearch, setMovieSearch] = useState([]);
@@ -40,11 +41,14 @@ function Header() {
     <>
       <div className="navigation">
         <div className="logo">
-          <h1>Movie Db</h1>
+          <Link to="/">
+            <h1>Movie Db</h1>
+          </Link>
         </div>
         <div className="nav-movie">
-          <div>films</div>
-          <div>sign in</div>
+          <div className="container-login-db">
+            <Nav />
+          </div>
         </div>
         <div className="search">
           <form

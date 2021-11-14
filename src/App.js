@@ -107,7 +107,6 @@ function App() {
           {!loading ? (
             <>
               <div id="begin" className="container-site wrapper-site">
-                <Nav />
                 <Header />
                 <BackgroundHome
                   backgroundImg={movieDay[0] ? movieDay[0]?.backdrop_path : ""}
@@ -135,7 +134,7 @@ function App() {
         <Route path="/movie/:movie">
           <>
             <div id="begin" className="container-site wrapper-site">
-              <Nav />
+              <Header />
               <MovieDetails />
             </div>
             <Footer />
@@ -144,7 +143,7 @@ function App() {
         <Route path="/person/:person">
           <>
             <div id="begin" className="container-site wrapper-site">
-              <Nav />
+              <Header />
               <PersonDetail />
             </div>
             <Footer />
