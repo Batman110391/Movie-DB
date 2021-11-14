@@ -279,7 +279,6 @@ function Nav() {
               <FormControl
                 className={clsx(classes.margin, classes.textField)}
                 variant="outlined"
-                autocomplete="off"
               >
                 <InputLabel
                   className="label-form"
