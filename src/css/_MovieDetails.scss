@@ -35,28 +35,6 @@
       @media screen and (max-width: $small) {
         height: unset;
       }
-
-      .watch-providers {
-        position: absolute;
-        bottom: -50px;
-
-        @media screen and (max-width: $small) {
-          height: unset;
-          top: 175px;
-          right: 105px;
-        }
-
-        a {
-          margin-right: 10px;
-          img {
-            width: 50px;
-            border: 1px solid gray;
-            @media screen and (max-width: $small) {
-              width: 40px;
-            }
-          }
-        }
-      }
     }
 
     .poster-movie {
@@ -103,6 +81,10 @@
         .trailer {
           cursor: pointer;
           font-size: 16px;
+          a {
+            text-decoration: none;
+            color: unset;
+          }
         }
 
         .fa-youtube {
@@ -191,6 +173,27 @@
     .rating-movie {
       width: 230px;
       margin: 0 auto;
+      position: relative;
+
+      .popover {
+        display: none;
+        position: absolute;
+        top: -50px;
+        font-size: 11px;
+        background-color: grey;
+        color: #fff;
+        padding: 5px;
+        z-index: 1000;
+        border-radius: 3px;
+      }
+
+      &:hover {
+        &.signed {
+          .popover {
+            display: block;
+          }
+        }
+      }
 
       .saving-movie {
         display: flex;
@@ -265,6 +268,26 @@
         .fa-imdb {
           color: gold;
           font-size: 25px;
+        }
+      }
+    }
+  }
+
+  .watch-providers {
+    display: flex;
+    @media screen and (max-width: $small) {
+      justify-content: center;
+    }
+
+    margin: 10px 0 20px 0;
+
+    a {
+      margin-right: 10px;
+      img {
+        width: 50px;
+        border: 1px solid gray;
+        @media screen and (max-width: $small) {
+          width: 40px;
         }
       }
     }

@@ -42,7 +42,10 @@ function Header() {
       <div className="navigation">
         <div className="logo">
           <Link to="/">
-            <h1>Movie Db</h1>
+            <img
+              src="https://i.ibb.co/dtZt04w/Movie-Db-logos-transparent.png"
+              alt="logo"
+            ></img>
           </Link>
         </div>
         <div className="nav-movie">

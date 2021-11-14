@@ -23,6 +23,7 @@ function MovieDetails() {
   const [watchProvider, setWatchProvider] = useState([]);
   const [loading, setLoading] = useState(true);
   const [state, setState] = useState({});
+  const [frame, setFrame] = useState("");
 
   const stateRedux = useSelector((state) => state.utent);
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ function MovieDetails() {
     getSimilarMovies();
     getReviewMovies();
     getWatchProviders();
+    getFrameMovie();
 
     setTimeout(() => {
       setLoading(false);
@@ -149,6 +151,19 @@ function MovieDetails() {
       });
   };
 
+  const getFrameMovie = () => {
+    fetch(
+      `https://api.themoviedb.org/3/movie/${movie}/videos?api_key=${process.env.REACT_APP_SECRET_CODE}`
+    )
+      .then((resp) => resp.json())
+      .then((frame) => {
+        if (!(frame.results.length === 0)) {
+          var key_code = frame.results[0].key;
+          setFrame("https://www.youtube.com/embed/" + key_code + "?rel=0");
+        }
+      });
+  };
+
   const toggleOverview = (e) => {
     if (e.target.classList.contains("mobile")) {
       e.target.classList.toggle("mobile-drop");
@@ -230,8 +245,6 @@ function MovieDetails() {
           }
         }
       }
-    } else {
-      console.log(e.target);
     }
   };
 
@@ -322,27 +335,6 @@ function MovieDetails() {
                     }
                     alt={movieDay?.title}
                   ></img>
-                  <div className="watch-providers">
-                    {watchProvider?.map((watch, i) => {
-                      if (watch.logo_path && watchProvider[2]) {
-                        return (
-                          <a
-                            key={i + "watchprovider"}
-                            href={watchProvider[2] ? watchProvider[2] : ""}
-                            target="_blank"
-                          >
-                            <img
-                              src={
-                                "http://image.tmdb.org/t/p/w500" +
-                                watch?.logo_path
-                              }
-                              alt={watch?.provider_name}
-                            ></img>
-                          </a>
-                        );
-                      }
-                    })}
-                  </div>
                 </div>
               </div>
               <div className="description-movie">
@@ -358,7 +350,7 @@ function MovieDetails() {
                     </p>
                   </h2>
                   <span className="link trailer">
-                    <a>
+                    <a href={frame} target="_blank">
                       <i className="fab fa-youtube"></i> Trailer
                     </a>
                   </span>
@@ -368,7 +360,14 @@ function MovieDetails() {
                   <span className="blur"></span>
                 </p>
               </div>
-              <div className="rating-movie">
+              <div
+                className={
+                  state?.isSignedIn ? "rating-movie" : "rating-movie signed"
+                }
+              >
+                <div className="popover">
+                  registrati per aggiungere i tuoi libri preferiti
+                </div>
                 <div className="saving-movie">
                   <i
                     onClick={(e) => toggleEnable(e, "S")}
@@ -410,6 +409,26 @@ function MovieDetails() {
                   </p>
                 </div>
               </div>
+            </div>
+            <div className="watch-providers">
+              {watchProvider?.map((watch, i) => {
+                if (watch.logo_path && watchProvider[2]) {
+                  return (
+                    <a
+                      key={i + "watchprovider"}
+                      href={watchProvider[2] ? watchProvider[2] : ""}
+                      target="_blank"
+                    >
+                      <img
+                        src={
+                          "http://image.tmdb.org/t/p/w500" + watch?.logo_path
+                        }
+                        alt={watch?.provider_name}
+                      ></img>
+                    </a>
+                  );
+                }
+              })}
             </div>
             <div className="accordion">
               <button

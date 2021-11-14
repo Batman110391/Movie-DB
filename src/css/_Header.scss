@@ -4,12 +4,8 @@
   align-items: center;
   justify-content: space-around;
   flex-wrap: wrap;
-  padding: 0 6px;
-  margin-bottom: 12px;
-
-  @media screen and (max-width: $small) {
-    padding: 6px;
-  }
+  padding: 7px;
+  background: #00000024;
 
   .container-login-db {
     position: relative;
@@ -20,10 +16,8 @@
       text-decoration: none;
       color: #ebebeb;
     }
-    h1 {
-      margin: 0;
-      padding: 0;
-      font-size: 1.5rem;
+    img {
+      width: 135px;
     }
 
     @media screen and (max-width: $small) {
