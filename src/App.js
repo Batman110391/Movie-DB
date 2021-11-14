@@ -135,6 +135,7 @@ function App() {
         <Route path="/movie/:movie">
           <>
             <div id="begin" className="container-site wrapper-site">
+              <Nav />
               <MovieDetails />
             </div>
             <Footer />
@@ -143,6 +144,7 @@ function App() {
         <Route path="/person/:person">
           <>
             <div id="begin" className="container-site wrapper-site">
+              <Nav />
               <PersonDetail />
             </div>
             <Footer />

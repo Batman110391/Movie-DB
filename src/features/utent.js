@@ -16,27 +16,21 @@ export const counterSlice = createSlice({
   reducers: {
     favorite: (state, action) => {
       state.favorite = action.payload;
-      console.log(state);
     },
     watchlist: (state, action) => {
       state.watchlist = action.payload;
-      console.log(state);
     },
     watch: (state, action) => {
       state.watch = action.payload;
-      console.log(state);
     },
     setName: (state, action) => {
       state.name = action.payload;
-      console.log(state);
     },
     setEmail: (state, action) => {
       state.email = action.payload;
-      console.log(state);
     },
     setSigned: (state, action) => {
       state.isSignedIn = action.payload;
-      console.log(state);
     },
   },
 });

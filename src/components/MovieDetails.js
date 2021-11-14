@@ -22,11 +22,17 @@ function MovieDetails() {
   const [movieCrew, setMovieCrew] = useState([]);
   const [watchProvider, setWatchProvider] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [state, setState] = useState({});
 
-  const state = useSelector((state) => state.utent);
+  const stateRedux = useSelector((state) => state.utent);
   const dispatch = useDispatch();
+  const db = firebase.firestore();
 
   let { movie } = useParams();
+
+  useEffect(() => {
+    setState(stateRedux);
+  }, [stateRedux]);
 
   useEffect(() => {
     setLoading(true);
@@ -94,7 +100,7 @@ function MovieDetails() {
     )
       .then((resp) => resp.json())
       .then((data) => {
-        const director = data.crew.filter(
+        const director = data?.crew?.filter(
           (curDirector) => curDirector.job === "Director"
         );
 
@@ -150,91 +156,90 @@ function MovieDetails() {
   };
 
   const toggleEnable = async (e, metod) => {
-    const db = firebase.firestore();
-    if (metod == "S") {
-      if (e.target.classList.contains("enable")) {
-        db.collection("Utenti")
-          .doc(state.email)
-          .update({
-            favorite: firebase.firestore.FieldValue.arrayUnion(movie),
-          });
+    if (state.isSignedIn) {
+      if (metod == "S") {
+        if (!searchId("S", movie)) {
+          db.collection("Utenti")
+            .doc(state.email)
+            .update({
+              favorite: firebase.firestore.FieldValue.arrayUnion(movie),
+            });
 
-        const data = await db.collection("Utenti").doc(state.email).get();
-        const result = data.data();
-        console.log(result);
-        if (result) {
-          dispatch(favorite(result.favorite));
+          const result = await getMovieDb();
+          if (result) {
+            dispatch(favorite(result.favorite));
+          }
+        } else {
+          db.collection("Utenti")
+            .doc(state.email)
+            .update({
+              favorite: firebase.firestore.FieldValue.arrayRemove(movie),
+            });
+
+          const result = await getMovieDb();
+          if (result) {
+            dispatch(favorite(result.favorite));
+          }
         }
-      } else {
-        db.collection("Utenti")
-          .doc(state.email)
-          .update({
-            favorite: firebase.firestore.FieldValue.arrayRemove(movie),
-          });
+      } else if (metod == "W") {
+        if (!searchId("W", movie)) {
+          db.collection("Utenti")
+            .doc(state.email)
+            .update({
+              watch: firebase.firestore.FieldValue.arrayUnion(movie),
+            });
 
-        const data = await db.collection("Utenti").doc(state.email).get();
-        const result = data.data();
-        if (result) {
-          dispatch(favorite(result.favorite));
+          const result = await getMovieDb();
+          if (result) {
+            dispatch(watch(result.watch));
+          }
+        } else {
+          db.collection("Utenti")
+            .doc(state.email)
+            .update({
+              watch: firebase.firestore.FieldValue.arrayRemove(movie),
+            });
+
+          const result = await getMovieDb();
+          if (result) {
+            dispatch(watch(result.watch));
+          }
         }
-      }
-    } else if (metod == "W") {
-      if (e.target.classList.contains("enable")) {
-        db.collection("Utenti")
-          .doc(state.email)
-          .update({
-            watch: firebase.firestore.FieldValue.arrayUnion(movie),
-          });
+      } else if (metod == "Wl") {
+        if (!searchId("Wl", movie)) {
+          db.collection("Utenti")
+            .doc(state.email)
+            .update({
+              watchlist: firebase.firestore.FieldValue.arrayUnion(movie),
+            });
 
-        const data = await db.collection("Utenti").doc(state.email).get();
-        const result = data.data();
-        console.log(result);
-        if (result) {
-          dispatch(watch(result.watch));
-        }
-      } else {
-        db.collection("Utenti")
-          .doc(state.email)
-          .update({
-            watch: firebase.firestore.FieldValue.arrayRemove(movie),
-          });
+          const result = await getMovieDb();
+          if (result) {
+            dispatch(watchlist(result.watchlist));
+          }
+        } else {
+          db.collection("Utenti")
+            .doc(state.email)
+            .update({
+              watchlist: firebase.firestore.FieldValue.arrayRemove(movie),
+            });
 
-        const data = await db.collection("Utenti").doc(state.email).get();
-        const result = data.data();
-        if (result) {
-          dispatch(watch(result.watch));
-        }
-      }
-    } else if (metod == "Wl") {
-      if (e.target.classList.contains("enable")) {
-        db.collection("Utenti")
-          .doc(state.email)
-          .update({
-            watchlist: firebase.firestore.FieldValue.arrayUnion(movie),
-          });
-
-        const data = await db.collection("Utenti").doc(state.email).get();
-        const result = data.data();
-        console.log(result);
-        if (result) {
-          dispatch(favorite(result.watchlist));
-        }
-      } else {
-        db.collection("Utenti")
-          .doc(state.email)
-          .update({
-            watchlist: firebase.firestore.FieldValue.arrayRemove(movie),
-          });
-
-        const data = await db.collection("Utenti").doc(state.email).get();
-        const result = data.data();
-        if (result) {
-          dispatch(watchlist(result.watchlist));
+          const result = await getMovieDb();
+          if (result) {
+            dispatch(watchlist(result.watchlist));
+          }
         }
       }
+    } else {
+      console.log(e.target);
     }
+  };
 
-    e.target.classList.toggle("enable");
+  const getMovieDb = async () => {
+    const data = await db.collection("Utenti").doc(state.email).get();
+    const result = data.data();
+
+    return result;
   };
 
   const toggleAccordion = (e, type) => {
@@ -272,19 +277,19 @@ function MovieDetails() {
   const searchId = (type, id) => {
     var bool = false;
 
-    if (type == "S") {
+    if (type === "S") {
       state.favorite.forEach((ele) => {
         if (id == ele) {
           bool = true;
         }
       });
-    } else if (type == "W") {
+    } else if (type === "W") {
       state.watch.forEach((ele) => {
         if (id == ele) {
           bool = true;
         }
       });
-    } else if (type == "Wl") {
+    } else if (type === "Wl") {
       state.watchlist.forEach((ele) => {
         if (id == ele) {
           bool = true;
@@ -318,10 +323,11 @@ function MovieDetails() {
                     alt={movieDay?.title}
                   ></img>
                   <div className="watch-providers">
-                    {watchProvider?.map((watch) => {
+                    {watchProvider?.map((watch, i) => {
                       if (watch.logo_path && watchProvider[2]) {
                         return (
                           <a
+                            key={i + "watchprovider"}
                             href={watchProvider[2] ? watchProvider[2] : ""}
                             target="_blank"
                           >
@@ -433,8 +439,8 @@ function MovieDetails() {
             </div>
             <div className="cast-movie cast open">
               <div className="box-accordion">
-                {movieCast.map((curPerson) => (
-                  <Link to={`/person/${curPerson.id}`}>
+                {movieCast.map((curPerson, i) => (
+                  <Link to={`/person/${curPerson.id}`} key={i + "castmovie"}>
                     <div className="person">
                       <img
                         src={
@@ -454,8 +460,8 @@ function MovieDetails() {
             </div>
             <div className="cast-movie crew">
               <div className="box-accordion">
-                {movieCrew.map((curPerson) => (
-                  <Link to={`/person/${curPerson.id}`}>
+                {movieCrew.map((curPerson, i) => (
+                  <Link to={`/person/${curPerson.id}`} key={i + "castmovie2"}>
                     <div className="person">
                       <img
                         src={
@@ -477,7 +483,7 @@ function MovieDetails() {
               {similarMovie.map((curMovie, i) => {
                 if (i < 6) {
                   return (
-                    <Link to={`/movie/${curMovie.id}`}>
+                    <Link to={`/movie/${curMovie.id}`} key={i + "similar"}>
                       <div className="movie">
                         <img
                           src={
@@ -495,7 +501,7 @@ function MovieDetails() {
             <div className="other-movie recensioni">
               <div className="box-accordion">
                 {reviewMovie.map((curReview, i) => (
-                  <div className="review-user">
+                  <div className="review-user" key={i + "rece"}>
                     <div className="avatar-user">
                       <img
                         src={

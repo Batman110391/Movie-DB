@@ -86,7 +86,6 @@ function Nav() {
     callbacks: {
       signInSuccessWithAuthResult: (authResult, redirectUrl) => true,
     },
-    signInSuccessUrl: "<url-to-redirect-to-on-success>",
   };
 
   const logIn = (e) => {
