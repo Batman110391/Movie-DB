@@ -7,7 +7,10 @@ import { getUnique } from "../utility";
 
 function PersonDetail() {
   const [personDetail, setPerson] = useState({});
-  const [personCredit, setPersonCredit] = useState([]);
+  const [personCredit, setPersonCredit] = useState({
+    cast: [],
+    crew: [],
+  });
   const [loading, setLoading] = useState(true);
 
   let { person } = useParams();
@@ -52,7 +55,6 @@ function PersonDetail() {
           cast: [castUnique],
           crew: [crewUnique],
         });
-        console.log(personCredit);
       });
   };
 
@@ -93,7 +95,7 @@ function PersonDetail() {
             <h5>Attore in {personCredit?.cast[0]?.length} Film</h5>
             <div className="person-cast">
               {personCredit?.cast[0]?.map((curMovie, i) => (
-                <Link to={`/movie/${curMovie.id}`}>
+                <Link to={`/movie/${curMovie.id}`} key={i + "personcredit1"}>
                   <img
                     src={
                       curMovie?.poster_path
@@ -110,7 +112,7 @@ function PersonDetail() {
             <h5>Regista/Produttore in {personCredit?.crew[0]?.length} Film</h5>
             <div className="person-crew">
               {personCredit?.crew[0]?.map((curMovie, i) => (
-                <Link to={`/movie/${curMovie.id}`}>
+                <Link to={`/movie/${curMovie.id}`} key={i + "personcredit"}>
                   <img
                     src={
                       curMovie?.poster_path
