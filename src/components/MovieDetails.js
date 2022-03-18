@@ -315,6 +315,19 @@ function MovieDetails() {
 
   return (
     <div className="container-movie-details">
+      <div class="lightbox-target" id="poster-movie-bg">
+        <div className="box-bg-large-movie">
+          <img
+            src={
+              movieDay?.poster_path
+                ? "http://image.tmdb.org/t/p/w500" + movieDay?.poster_path
+                : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"
+            }
+            alt={movieDay?.title}
+          />
+        </div>
+        <a class="lightbox-close" href="#"></a>
+      </div>
       <BackLine />
       {!loading ? (
         <>
@@ -326,15 +339,17 @@ function MovieDetails() {
             <div className="info-movie">
               <div className="box-poster">
                 <div className="poster-movie">
-                  <img
-                    src={
-                      movieDay?.poster_path
-                        ? "http://image.tmdb.org/t/p/w500" +
-                          movieDay?.poster_path
-                        : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"
-                    }
-                    alt={movieDay?.title}
-                  ></img>
+                  <a href="#poster-movie-bg">
+                    <img
+                      src={
+                        movieDay?.poster_path
+                          ? "http://image.tmdb.org/t/p/w500" +
+                            movieDay?.poster_path
+                          : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"
+                      }
+                      alt={movieDay?.title}
+                    ></img>
+                  </a>
                 </div>
               </div>
               <div className="description-movie">

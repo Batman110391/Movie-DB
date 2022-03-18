@@ -30,6 +30,9 @@ function Header() {
     )
       .then((resp) => resp.json())
       .then((data) => {
+        data?.results?.sort(function (a, b) {
+          return b.popularity - a.popularity;
+        });
         setMovieSearch(data.results);
         setLoading(false);
       });
