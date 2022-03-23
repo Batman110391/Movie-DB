@@ -28,6 +28,12 @@
     cursor: pointer;
     position: absolute;
     bottom: 10px;
+
+    .firebaseui_container {
+      .firebaseui-id-page-sign-in {
+        height: 240px;
+      }
+    }
   }
 
   .content-user {
