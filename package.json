@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@blueprintjs/core": "^4.1.2",
+    "@blueprintjs/docs-theme": "^4.1.2",
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
     "@fortawesome/fontawesome": "^1.1.8",

@@ -19,6 +19,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { useSelector, useDispatch } from "react-redux";
 import { setName, setEmail, setSigned } from "../features/utent";
+import AccountMenu from "./AccountMenu";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -228,44 +229,12 @@ function Nav() {
       </nav>
       <div className="pop-up">
         {state.isSignedIn ? (
-          <div className="content-user">
-            <h4>Ciao, {state.name}</h4>
-            <Button
-              onClick={() => signOut()}
-              className="esci"
-              variant="contained"
-            >
-              Esci
-            </Button>
-            {upload ? (
-              <div>
-                <CircularProgress />
-              </div>
-            ) : (
-              <div className="container-img-upload">
-                <input
-                  onChange={handleChangeImg}
-                  accept="image/*"
-                  className={classes.input}
-                  name="files[]"
-                  style={{ display: "none" }}
-                  id="raised-button-file"
-                  multiple
-                  type="file"
-                />
-                <label htmlFor="raised-button-file">
-                  <Button
-                    id="upload-img-button"
-                    variant="outlined"
-                    component="span"
-                    className={classes.button}
-                  >
-                    Aggiorna immagine
-                  </Button>
-                </label>
-              </div>
-            )}
-          </div>
+          <AccountMenu
+            name={state.name.split(" ").shift()}
+            signOut={signOut}
+            handleChangeImg={handleChangeImg}
+            upload={upload}
+          />
         ) : (
           <div className="content-auth">
             <div className="sign-in">
