@@ -27,6 +27,7 @@ import Skeleton from "@mui/material/Skeleton";
 import Footer from "./components/Footer";
 import UpcomingMovie from "./components/UpcomingMovie";
 import Nav from "./components/Nav";
+import MyList from "./components/MyList";
 
 firebaseCongif();
 
@@ -101,56 +102,66 @@ function App() {
   };
 
   return (
-    <Router>
-      <Switch>
-        <Route path="/" exact>
-          {!loading ? (
+    <>
+      <Router>
+        <Header />
+        <Switch>
+          <Route path="/" exact>
+            {!loading ? (
+              <>
+                <div id="begin" className="container-site wrapper-site">
+                  <BackgroundHome
+                    backgroundImg={
+                      movieDay[0] ? movieDay[0]?.backdrop_path : ""
+                    }
+                    home={true}
+                  />
+                  <MovieOfDays movieOfDays={movieDay} />
+                  <UpcomingMovie upcomingMovie={upcomingMovie} />
+                </div>
+                <Footer />
+              </>
+            ) : (
+              <>
+                <Skeleton
+                  width="100%"
+                  height="300px"
+                  style={{ backgroundColor: "gray" }}
+                />
+                <Skeleton style={{ backgroundColor: "gray" }} />
+                <Skeleton style={{ backgroundColor: "gray" }} />
+                <Skeleton style={{ backgroundColor: "gray" }} />
+                <Skeleton height="300px" style={{ backgroundColor: "gray" }} />
+              </>
+            )}
+          </Route>
+          <Route path="/movie/:movie">
             <>
               <div id="begin" className="container-site wrapper-site">
-                <Header />
-                <BackgroundHome
-                  backgroundImg={movieDay[0] ? movieDay[0]?.backdrop_path : ""}
-                  home={true}
-                />
-                <MovieOfDays movieOfDays={movieDay} />
-                <UpcomingMovie upcomingMovie={upcomingMovie} />
+                <MovieDetails />
               </div>
               <Footer />
             </>
-          ) : (
+          </Route>
+          <Route path="/person/:person">
             <>
-              <Skeleton
-                width="100%"
-                height="300px"
-                style={{ backgroundColor: "gray" }}
-              />
-              <Skeleton style={{ backgroundColor: "gray" }} />
-              <Skeleton style={{ backgroundColor: "gray" }} />
-              <Skeleton style={{ backgroundColor: "gray" }} />
-              <Skeleton height="300px" style={{ backgroundColor: "gray" }} />
+              <div id="begin" className="container-site wrapper-site">
+                <PersonDetail />
+              </div>
+              <Footer />
             </>
-          )}
-        </Route>
-        <Route path="/movie/:movie">
-          <>
-            <div id="begin" className="container-site wrapper-site">
-              <Header />
-              <MovieDetails />
-            </div>
-            <Footer />
-          </>
-        </Route>
-        <Route path="/person/:person">
-          <>
-            <div id="begin" className="container-site wrapper-site">
-              <Header />
-              <PersonDetail />
-            </div>
-            <Footer />
-          </>
-        </Route>
-      </Switch>
-    </Router>
+          </Route>
+          <Route path="/mylist/:type">
+            <>
+              <div id="begin" className="container-site wrapper-site">
+                <MyList state={state} />
+              </div>
+              <Footer />
+            </>
+          </Route>
+        </Switch>
+      </Router>
+    </>
   );
 }
 

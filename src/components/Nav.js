@@ -131,7 +131,7 @@ function Nav() {
       .then(() => {
         dispatch(setSigned(false));
         setImgUser(null);
-        window.location.reload();
+        window.location.reload("/");
       })
       .catch((error) => {
         alert(error);

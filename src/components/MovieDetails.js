@@ -315,7 +315,7 @@ function MovieDetails() {
 
   return (
     <div className="container-movie-details">
-      <div class="lightbox-target" id="poster-movie-bg">
+      <div className="lightbox-target" id="poster-movie-bg">
         <div className="box-bg-large-movie">
           <img
             src={
@@ -326,7 +326,7 @@ function MovieDetails() {
             alt={movieDay?.title}
           />
         </div>
-        <a class="lightbox-close" href="#"></a>
+        <a className="lightbox-close" href="#"></a>
       </div>
       <BackLine />
       {!loading ? (

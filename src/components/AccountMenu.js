@@ -13,18 +13,21 @@ export default function MenuExample({
   return (
     <Example className="account-menu" options={false}>
       <Menu className={Classes.ELEVATION_1} style={{ textTransform: "none" }}>
-        <h4>Ciao, {name}</h4>
-        <MenuDivider />
         {upload ? (
           <div style={{ textAlign: "center", padding: "4px" }}>
             <CircularProgress />
           </div>
         ) : (
           <>
-            <MenuItem icon="list" text="La tua lista" />
+            <MenuItem href="/mylist/watch" icon="list" text="La tua lista" />
+
             <MenuDivider />
-            <MenuItem icon="heart" text="Preferiti" />
-            <MenuItem icon="eye-open" text="Watchlist" />
+            <MenuItem href="/mylist/favorite" icon="heart" text="Preferiti" />
+            <MenuItem
+              href="/mylist/watchlist"
+              icon="eye-open"
+              text="Watchlist"
+            />
             <input
               onChange={handleChangeImg}
               accept="image/*"
