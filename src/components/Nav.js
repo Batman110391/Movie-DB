@@ -181,6 +181,8 @@ function Nav() {
     var storageRef = firebase.storage().ref();
     var ref = storageRef.child(state.email);
 
+    console.log("ok");
+
     var metadata = {
       contentType: file.type,
     };
