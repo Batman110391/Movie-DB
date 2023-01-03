@@ -62,7 +62,7 @@ function MyList({ state }) {
       <BackLine />
       {!loading ? (
         <>
-          <div className="person-work">
+          <div className="person-work" style={{ marginTop: "50px" }}>
             <h5>
               {type == "favorite"
                 ? "preferiti - "
