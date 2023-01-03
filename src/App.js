@@ -8,7 +8,10 @@ import {
   setName,
   setEmail,
   setSigned,
+  setUser,
 } from "./features/utent";
+
+import CssBaseline from "@mui/material/CssBaseline";
 
 import { firebaseCongif } from "./firebase";
 import firebase from "firebase/app";
@@ -28,6 +31,10 @@ import Footer from "./components/Footer";
 import UpcomingMovie from "./components/UpcomingMovie";
 import Nav from "./components/Nav";
 import MyList from "./components/MyList";
+import { BottomNavigation } from "@mui/material";
+import { Box } from "@mui/system";
+import Profile from "./components/Profile";
+import { getItemCookie } from "./utils/util";
 
 firebaseCongif();
 
@@ -41,23 +48,27 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
-    getDayMovies();
-    getUpcomingMovies();
-
-    setTimeout(() => {
+    (async () => {
+      await getDayMovies();
+      await getUpcomingMovies();
       setLoading(false);
       window.scrollTo(0, 0);
-    }, 100);
+    })();
   }, []);
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
+    (async () => {
+      const user = await getItemCookie("movie_db_user");
       if (user) {
-        dispatch(setName(user.displayName));
-        dispatch(setEmail(user.email));
+        try {
+          const parseInJson = JSON.parse(user);
+
+          dispatch(setUser(parseInJson));
+        } catch (err) {
+          console.error(err);
+        }
       }
-      dispatch(setSigned(!!user));
-    });
+    })();
   }, []);
 
   useEffect(() => {
@@ -80,18 +91,17 @@ function App() {
     fetchData();
   }, [state.isSignedIn]);
 
-  const getDayMovies = () => {
+  const getDayMovies = async () => {
     fetch(
       `https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.REACT_APP_SECRET_CODE}&language=it-IT`
     )
       .then((resp) => resp.json())
       .then((data) => {
-        const filtered = data.results.filter((e, i) => i < 6);
-        setMovieDay(filtered);
+        setMovieDay(data.results);
       });
   };
 
-  const getUpcomingMovies = () => {
+  const getUpcomingMovies = async () => {
     fetch(
       `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_SECRET_CODE}&language=it-IT`
     )
@@ -104,11 +114,11 @@ function App() {
   return (
     <>
       <Router>
-        <Header />
         <Switch>
           <Route path="/" exact>
             {!loading ? (
               <>
+                <Header />
                 <div id="begin" className="container-site wrapper-site">
                   <BackgroundHome
                     backgroundImg={
@@ -137,6 +147,7 @@ function App() {
           </Route>
           <Route path="/movie/:movie">
             <>
+              <Header />
               <div id="begin" className="container-site wrapper-site">
                 <MovieDetails />
               </div>
@@ -145,6 +156,7 @@ function App() {
           </Route>
           <Route path="/person/:person">
             <>
+              <Header />
               <div id="begin" className="container-site wrapper-site">
                 <PersonDetail />
               </div>
@@ -157,6 +169,14 @@ function App() {
                 <MyList state={state} />
               </div>
               <Footer />
+            </>
+          </Route>
+          <Route path="/profile">
+            <>
+              <Header />
+              <div id="begin" className="container-site wrapper-site">
+                <Profile />
+              </div>
             </>
           </Route>
         </Switch>

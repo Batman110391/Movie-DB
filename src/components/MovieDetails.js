@@ -38,20 +38,19 @@ function MovieDetails() {
   useEffect(() => {
     setLoading(true);
 
-    getDayMovies();
-    getMovieCast();
-    getSimilarMovies();
-    getReviewMovies();
-    getWatchProviders();
-    getFrameMovie();
-
-    setTimeout(() => {
+    (async () => {
+      await getDayMovies();
+      await getMovieCast();
+      await getSimilarMovies();
+      await getReviewMovies();
+      await getWatchProviders();
+      await getFrameMovie();
       setLoading(false);
       window.scrollTo(0, 0);
-    }, 100);
+    })();
   }, [movie]);
 
-  const getSimilarMovies = () => {
+  const getSimilarMovies = async () => {
     fetch(
       `https://api.themoviedb.org/3/movie/${movie}/similar?api_key=${process.env.REACT_APP_SECRET_CODE}&language=it-IT`
     )
@@ -61,7 +60,7 @@ function MovieDetails() {
       });
   };
 
-  const getReviewMovies = () => {
+  const getReviewMovies = async () => {
     fetch(
       `https://api.themoviedb.org/3/movie/${movie}/reviews?api_key=${process.env.REACT_APP_SECRET_CODE}`
     )
@@ -71,7 +70,7 @@ function MovieDetails() {
       });
   };
 
-  const getDayMovies = () => {
+  const getDayMovies = async () => {
     fetch(
       `https://api.themoviedb.org/3/movie/${movie}?api_key=${process.env.REACT_APP_SECRET_CODE}&language=it-IT`
     )
@@ -81,7 +80,7 @@ function MovieDetails() {
       });
   };
 
-  const getWatchProviders = () => {
+  const getWatchProviders = async () => {
     fetch(
       `https://api.themoviedb.org/3/movie/${movie}/watch/providers?api_key=${process.env.REACT_APP_SECRET_CODE}`
     )
@@ -96,7 +95,7 @@ function MovieDetails() {
       });
   };
 
-  const getMovieCast = () => {
+  const getMovieCast = async () => {
     fetch(
       `https://api.themoviedb.org/3/movie/${movie}/credits?api_key=${process.env.REACT_APP_SECRET_CODE}&language=it-IT`
     )
@@ -151,7 +150,7 @@ function MovieDetails() {
       });
   };
 
-  const getFrameMovie = () => {
+  const getFrameMovie = async () => {
     fetch(
       `https://api.themoviedb.org/3/movie/${movie}/videos?api_key=${process.env.REACT_APP_SECRET_CODE}`
     )
@@ -328,7 +327,7 @@ function MovieDetails() {
         </div>
         <a className="lightbox-close" href="#"></a>
       </div>
-      <BackLine />
+
       {!loading ? (
         <>
           <BackgroundHome

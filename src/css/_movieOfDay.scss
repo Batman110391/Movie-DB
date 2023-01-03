@@ -10,13 +10,24 @@
     }
 
     @media screen and (min-width: $extra-large) {
+      /* .flickity-button {
+        display: none;
+      } */
+
+      &.upcoming {
+        .flickity-button {
+          display: block;
+        }
+      }
+    }
+    @media screen and (max-width: $small) {
       .flickity-button {
         display: none;
       }
 
       &.upcoming {
         .flickity-button {
-          display: block;
+          display: none;
         }
       }
     }

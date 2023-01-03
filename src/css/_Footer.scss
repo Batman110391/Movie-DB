@@ -4,8 +4,12 @@ footer {
   display: grid;
   -ms-grid-columns: 1fr;
   grid-template-columns: 1fr;
-  -ms-grid-rows: 200px auto;
-  grid-template-rows: 200px auto;
+  -ms-grid-rows: 140px auto;
+  grid-template-rows: 140px auto;
+
+  @media screen and (max-width: $small) {
+    padding-bottom: 55px;
+  }
 }
 
 .info-footer {
@@ -134,8 +138,8 @@ footer {
   }
   footer {
     padding-top: 50px;
-    -ms-grid-rows: 235px auto;
-    grid-template-rows: 235px auto;
+    -ms-grid-rows: 115px auto;
+    grid-template-rows: 115px auto;
   }
 }
 

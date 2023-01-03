@@ -4,11 +4,10 @@ import Flickity from "react-flickity-component";
 
 function UpcomingMovie({ upcomingMovie }) {
   const flickityOptions = {
-    wrapAround: false,
-    draggable: true,
-    groupCells: 3,
+    groupCells: true,
+    dragThreshold: 5,
     contain: true,
-    initialIndex: 3,
+    freeScroll: true,
   };
 
   return (

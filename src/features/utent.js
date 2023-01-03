@@ -4,10 +4,12 @@ const initialState = {
   value: 1,
   name: "",
   email: "",
+  userImage: "",
   isSignedIn: false,
   favorite: [],
   watchlist: [],
   watch: [],
+  myList: {},
 };
 
 export const counterSlice = createSlice({
@@ -32,11 +34,35 @@ export const counterSlice = createSlice({
     setSigned: (state, action) => {
       state.isSignedIn = action.payload;
     },
+    setImgUser: (state, action) => {
+      state.userImage = action.payload;
+    },
+    setUser: (state, action) => {
+      const newState = { ...state, ...action.payload };
+
+      return newState;
+    },
+    logout: (state, action) => {
+      return initialState;
+    },
+    setList: (state, action) => {
+      state.myList = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { favorite, watchlist, watch, setName, setEmail, setSigned } =
-  counterSlice.actions;
+export const {
+  favorite,
+  watchlist,
+  watch,
+  setName,
+  setEmail,
+  setSigned,
+  setUser,
+  setImgUser,
+  logout,
+  setList,
+} = counterSlice.actions;
 
 export default counterSlice.reducer;

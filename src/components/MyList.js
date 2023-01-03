@@ -29,7 +29,7 @@ function MyList({ state }) {
     } else if (type && type == "watchlist") {
       ids = [...state?.watchlist];
     } else if (type) {
-      ids = [...state?.watch, ...state?.favorite];
+      ids = [...state?.watch];
     }
 
     let idsUnique = ids ? [...new Set(ids)] : [];
@@ -39,13 +39,13 @@ function MyList({ state }) {
         promises.push(
           fetch(
             `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_SECRET_CODE}&language=it-IT`
-          ).then((resp) => resp.json())
+          )
         );
       });
     }
 
-    if (promises) {
-      getMyList(promises);
+    if (promises.length > 0) {
+      await getMyList(promises);
     }
   };
 

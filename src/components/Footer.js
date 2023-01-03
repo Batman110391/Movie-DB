@@ -48,48 +48,7 @@ function Footer() {
             essere un semplice sito per appassionati di film. Utilizzo di
             Firebase per memorizzare i dati.
           </h5>
-          <div onClick={() => HandlerEmail()} className="contact">
-            Contattami
-            <div className="container-form-email">
-              <form className="contact-form" onSubmit={sendEmail}>
-                <Input
-                  value="A: simone.gattinara@gmail.com"
-                  inputProps={{ "aria-label": "description" }}
-                  disabled
-                  type="text"
-                />
-                <Input
-                  placeholder="Inserisci il tuo Nome"
-                  inputProps={{ "aria-label": "description" }}
-                  name="name"
-                  type="text"
-                  required
-                />
-                <Input
-                  placeholder="Inserisci la tua Email"
-                  type="email"
-                  inputProps={{ "aria-label": "description" }}
-                  name="email"
-                  required
-                />
-
-                <textarea
-                  name="message"
-                  className="message"
-                  rows="10"
-                  placeholder="Inserisci il tuo messaggio..."
-                  maxLength="200"
-                  required
-                ></textarea>
-                <Button className="invia" type="submit" variant="contained">
-                  Invia
-                </Button>
-              </form>
-            </div>
-          </div>
         </div>
-
-        <a href="#begin" className="return"></a>
       </div>
       <div className="social-footer">
         <h2>Seguimi</h2>

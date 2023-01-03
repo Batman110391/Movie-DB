@@ -1,3 +1,22 @@
+.mobile-navigation {
+  position: fixed;
+  bottom: -1px;
+  width: 100%;
+  z-index: 999;
+  color: $white;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 7px 0;
+  height: 55px;
+  background: #14181c;
+
+  @media screen and (min-width: $small) {
+    display: none;
+  }
+}
+
 .navigation {
   color: $white;
   display: flex;
@@ -6,7 +25,11 @@
   flex-wrap: wrap;
   padding: 7px;
   height: 50px;
-  background: #00000024;
+  background: #14181c;
+
+  @media screen and (max-width: $small) {
+    display: none;
+  }
 
   .container-login-db {
     position: relative;

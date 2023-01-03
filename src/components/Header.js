@@ -1,14 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Skeleton from "@mui/material/Skeleton";
 import Nav from "./Nav";
 import { useParams } from "react-router-dom";
+import { Box } from "@mui/material";
+import GridViewIcon from "@mui/icons-material/GridView";
+import PersonIcon from "@mui/icons-material/Person";
+import SearchIcon from "@mui/icons-material/Search";
+import { IconButton } from "@material-ui/core";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import { areEqual, useBreakpointWidht } from "../utils/util";
 
 function Header() {
   const [movieSearch, setMovieSearch] = useState([]);
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
   const [loading, setLoading] = useState(true);
 
   let { movie } = useParams();
+  let history = useHistory();
+
+  const colsXS = useBreakpointWidht("xs");
+  const colsSM = useBreakpointWidht("sm");
+  const colsMD = useBreakpointWidht("md");
 
   useEffect(() => {
     setMovieSearch([]);
@@ -48,8 +62,48 @@ function Header() {
     });
   };
 
+  const handleListItemClick = (event, newValue) => {
+    setSelectedIndex(newValue);
+
+    if (newValue === 0) {
+      history.push("/");
+    } else if (newValue === 1) {
+      history.push("/");
+    } else if (newValue === 2) {
+      history.push("/profile");
+    }
+  };
+
   return (
     <>
+      <div className="mobile-navigation">
+        <ListItemButton
+          selected={selectedIndex === 0}
+          onClick={(event) => handleListItemClick(event, 0)}
+        >
+          <IconButton color="inherit">
+            <GridViewIcon />
+          </IconButton>
+        </ListItemButton>
+        <ListItemButton
+          selected={selectedIndex === 1}
+          onClick={(event) => handleListItemClick(event, 1)}
+          color="inherit"
+        >
+          <IconButton color="inherit">
+            <SearchIcon />
+          </IconButton>
+        </ListItemButton>
+        <ListItemButton
+          selected={selectedIndex === 2}
+          onClick={(event) => handleListItemClick(event, 2)}
+          color="inherit"
+        >
+          <IconButton color="inherit">
+            <PersonIcon />
+          </IconButton>
+        </ListItemButton>
+      </div>
       <div className="navigation">
         <div className="logo">
           <Link to="/">
@@ -59,11 +113,7 @@ function Header() {
             ></img>
           </Link>
         </div>
-        <div className="nav-movie">
-          <div className="container-login-db">
-            <Nav />
-          </div>
-        </div>
+
         <div className="search">
           <form
             id="search-form"
@@ -83,6 +133,15 @@ function Header() {
             <input className="search-submit" type="submit"></input>
             <span></span>
           </form>
+        </div>
+        <div className="nav-movie">
+          {/* <div className="container-login-db">{colsSM && <Nav />}</div> */}
+          <Link
+            style={{ color: "white", textDecoration: "none" }}
+            to="/profile"
+          >
+            <PersonIcon />
+          </Link>
         </div>
       </div>
       <div className="container-movie-search">
