@@ -68,7 +68,7 @@ function Header() {
     if (newValue === 0) {
       history.push("/");
     } else if (newValue === 1) {
-      history.push("/");
+      history.push("/search");
     } else if (newValue === 2) {
       history.push("/profile");
     }

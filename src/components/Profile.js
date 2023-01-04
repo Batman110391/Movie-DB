@@ -24,6 +24,7 @@ import BackLine from "./BackLine";
 import { Skeleton } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Link } from "react-router-dom";
+import Grid from "@mui/material/Grid";
 
 export default function Profile() {
   const state = useSelector((state) => state.utent);
@@ -290,7 +291,7 @@ function CustomList({ list = [], loading }) {
     <div className="container-person-detail">
       {!loading ? (
         <>
-          <div className="person-work">
+          {/* <div className="person-work">
             <div className="person-crew">
               {list ? (
                 list?.map((curMovie, i) => (
@@ -310,6 +311,39 @@ function CustomList({ list = [], loading }) {
                 <div>Nessun film presente</div>
               )}
             </div>
+          </div> */}
+          <div className="person-work">
+            <Grid
+              container
+              spacing={{ xs: 1 }}
+              columns={{ xs: 3, sm: 5, md: 7 }}
+              alignItems="center"
+            >
+              {list.length > 0 ? (
+                list?.map((curMovie, i) => (
+                  <Grid item xs={1} key={i} justifyContent="center">
+                    <Stack justifyContent={"center"} direction="row">
+                      <Link
+                        to={`/movie/${curMovie.id}`}
+                        key={i + "personcredit"}
+                      >
+                        <img
+                          src={
+                            curMovie?.poster_path
+                              ? "http://image.tmdb.org/t/p/w500" +
+                                curMovie?.poster_path
+                              : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"
+                          }
+                          alt={curMovie?.title}
+                        ></img>
+                      </Link>
+                    </Stack>
+                  </Grid>
+                ))
+              ) : (
+                <div>Nessun film presente</div>
+              )}
+            </Grid>
           </div>
         </>
       ) : (

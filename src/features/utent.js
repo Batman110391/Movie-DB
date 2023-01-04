@@ -10,12 +10,16 @@ const initialState = {
   watchlist: [],
   watch: [],
   myList: {},
+  historySearch: [],
 };
 
 export const counterSlice = createSlice({
   name: "counter",
   initialState,
   reducers: {
+    historySearch: (state, action) => {
+      state.historySearch = action.payload;
+    },
     favorite: (state, action) => {
       state.favorite = action.payload;
     },
@@ -63,6 +67,7 @@ export const {
   setImgUser,
   logout,
   setList,
+  historySearch,
 } = counterSlice.actions;
 
 export default counterSlice.reducer;

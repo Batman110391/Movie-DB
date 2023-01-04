@@ -66,7 +66,6 @@ function PersonDetail() {
 
   return (
     <div className="container-person-detail">
-      <BackLine />
       {!loading ? (
         <>
           <div className="person">

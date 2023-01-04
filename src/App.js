@@ -9,6 +9,7 @@ import {
   setEmail,
   setSigned,
   setUser,
+  historySearch,
 } from "./features/utent";
 
 import CssBaseline from "@mui/material/CssBaseline";
@@ -35,6 +36,8 @@ import { BottomNavigation } from "@mui/material";
 import { Box } from "@mui/system";
 import Profile from "./components/Profile";
 import { getItemCookie } from "./utils/util";
+import Search from "./components/SearchPage";
+import SearchPage from "./components/SearchPage";
 
 firebaseCongif();
 
@@ -78,13 +81,20 @@ function App() {
         const data = await db.collection("Utenti").doc(state.email).get();
         const result = data.data();
         if (result) {
-          dispatch(favorite(result.favorite));
-          dispatch(watchlist(result.watchlist));
-          dispatch(watch(result.watch));
+          dispatch(favorite(result?.favorite || []));
+          dispatch(watchlist(result?.watchlist || []));
+          dispatch(watch(result?.watch || []));
+          dispatch(
+            historySearch(
+              result?.historySearch?.sort(
+                (a, b) => new Date(a.dateSearch) - new Date(b.dateSearch)
+              ) || []
+            )
+          );
         } else {
           db.collection("Utenti")
             .doc(state.email)
-            .set({ favorite: [], watchlist: [], watch: [] });
+            .set({ favorite: [], watchlist: [], watch: [], historySearch: [] });
         }
       }
     };
@@ -169,6 +179,13 @@ function App() {
                 <MyList state={state} />
               </div>
               <Footer />
+            </>
+          </Route>
+          <Route path="/search">
+            <>
+              <Header />
+
+              <SearchPage />
             </>
           </Route>
           <Route path="/profile">
