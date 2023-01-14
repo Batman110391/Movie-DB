@@ -152,7 +152,7 @@ function MovieDetails() {
 
   const getFrameMovie = async () => {
     fetch(
-      `https://api.themoviedb.org/3/movie/${movie}/videos?api_key=${process.env.REACT_APP_SECRET_CODE}`
+      `https://api.themoviedb.org/3/movie/${movie}/videos?api_key=${process.env.REACT_APP_SECRET_CODE}&language=it-IT`
     )
       .then((resp) => resp.json())
       .then((frame) => {

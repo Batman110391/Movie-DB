@@ -145,12 +145,45 @@ function App() {
               <>
                 <Skeleton
                   width="100%"
-                  height="300px"
-                  style={{ backgroundColor: "gray" }}
+                  height="350px"
+                  style={{ backgroundColor: "gray", marginTop: "-80px" }}
                 />
-                <Skeleton style={{ backgroundColor: "gray" }} />
-                <Skeleton style={{ backgroundColor: "gray" }} />
-                <Skeleton style={{ backgroundColor: "gray" }} />
+                <Skeleton
+                  style={{
+                    backgroundColor: "gray",
+                    width: "85%",
+                    margin: "-50px auto 0",
+                  }}
+                />
+                <Skeleton
+                  style={{
+                    backgroundColor: "gray",
+                    width: "80%",
+                    margin: "auto",
+                  }}
+                />
+                <Skeleton
+                  style={{
+                    backgroundColor: "gray",
+                    width: "75%",
+                    margin: "auto",
+                  }}
+                />
+                <Skeleton
+                  style={{
+                    backgroundColor: "gray",
+                    width: "75%",
+                    margin: "20px auto -50px",
+                  }}
+                />
+                <Skeleton height="300px" style={{ backgroundColor: "gray" }} />
+                <Skeleton
+                  style={{
+                    backgroundColor: "gray",
+                    width: "70%",
+                    margin: "20px auto -50px",
+                  }}
+                />
                 <Skeleton height="300px" style={{ backgroundColor: "gray" }} />
               </>
             )}

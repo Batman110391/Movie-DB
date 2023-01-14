@@ -116,21 +116,23 @@ export default function SearchPage() {
 
   const redirectMovie = (movieId, type) => {
     if (movieId) {
-      const currStory = {
-        title: searchInput,
-        type: typeQuery,
-        dateSearch: new Date().toString(),
-      };
+      if (state.isSignedIn) {
+        const currStory = {
+          title: searchInput,
+          type: typeQuery,
+          dateSearch: new Date().toString(),
+        };
 
-      const unionStory = [currStory, ...state.historySearch];
+        const unionStory = [currStory, ...state.historySearch];
 
-      db.collection("Utenti")
-        .doc(state.email)
-        .update({
-          historySearch: unionStory.filter((_, i) => i <= 50),
-        });
+        db.collection("Utenti")
+          .doc(state.email)
+          .update({
+            historySearch: unionStory.filter((_, i) => i <= 50),
+          });
 
-      dispatch(historySearch(unionStory));
+        dispatch(historySearch(unionStory));
+      }
 
       history.push(`/${type}/${movieId}`);
     }
